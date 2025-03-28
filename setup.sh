@@ -35,7 +35,7 @@ echo "Now, setting up Krayin stable version..."
 docker exec -i ${apache_container_id} bash -c "cd krayin && git reset --hard v2.1.0"
 
 # installing composer dependencies inside container
-docker exec -i ${apache_container_id} bash -c "cd krayin && composer install"
+docker exec -i ${apache_container_id} bash -c "cd krayin && composer install --no-dev"
 
 # moving `.env` file
 docker cp .configs/.env ${apache_container_id}:/var/www/html/krayin/.env
