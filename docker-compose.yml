@@ -6,12 +6,12 @@ services:
       args:
         container_project_path: /var/www/html/
         uid: 1026
-        user: $USER
+        user: lumax
       context: .
       dockerfile: ./Dockerfile
     image: krayin-php-apache
     ports:
-      - 80:80
+      - 8188:80
     volumes:
       - ./workspace/:/var/www/html/
 
@@ -21,15 +21,19 @@ services:
     environment:
       MYSQL_ROOT_HOST: "%"
       MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 3306:3306
+#    ports:
+#      - 3306:3306
+    expose:
+      - 3306
     volumes:
       - ./.configs/mysql-data:/var/lib/mysql/
 
   krayin-redis:
     image: redis:6.2-alpine
-    ports:
-      - 6379:6379
+#    ports:
+#      - 6379:6379
+    expose:
+      - 6379
     command: redis-server --save 20 1 --loglevel warning
     volumes:
       - ./.configs/redis-data:/data
